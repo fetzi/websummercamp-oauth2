@@ -1,10 +1,8 @@
 <?php
 declare(strict_types=1);
 
-use App\Handlers\HttpErrorHandler;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
-use App\JsonApi\DocumentFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
