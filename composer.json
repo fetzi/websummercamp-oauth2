@@ -4,13 +4,15 @@
     "require": {
         "php": ">=7.1",
         "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.3",
         "hackerboy/json-api": "^1.2",
         "illuminate/database": "^5.8",
         "league/oauth2-server": "^8.0",
         "monolog/monolog": "^1.24",
         "php-di/php-di": "^6.0",
         "slim/psr7": "dev-master",
-        "slim/slim": "^4"
+        "slim/slim": "^4",
+        "vlucas/phpdotenv": "^3.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5"
@@ -31,6 +33,10 @@
     },
     "scripts": {
         "start": "php -S localhost:8080 -t public",
-        "test": "phpunit"
+        "client": "php -S localhost:9999 -t client",
+        "test": "phpunit",
+        "db:migrate": "php setup/migrate.php",
+        "db:seed": "php setup/seeds.php",
+        "oauth:keys": "openssl genrsa -out keys/private.key 2048 && openssl rsa -in keys/private.key -pubout -out keys/public.key && chmod 600 keys/*"
     }
 }

@@ -2,9 +2,17 @@
 declare(strict_types=1);
 
 use DI\ContainerBuilder;
+use Illuminate\Database\Capsule\Manager;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+$dotenv = Dotenv\Dotenv::create(__DIR__ . '/../');
+$dotenv->load();
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
@@ -23,6 +31,8 @@ $dependencies($containerBuilder);
 
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
+
+$container->get(Manager::class);
 
 // Instantiate the app
 AppFactory::setContainer($container);

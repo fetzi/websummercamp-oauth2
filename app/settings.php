@@ -13,6 +13,16 @@ return function (ContainerBuilder $containerBuilder) {
                 'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
                 'level' => Logger::DEBUG,
             ],
+            'database' => [
+                'driver'   => getenv('DB_DRIVER'),
+                'database' => __DIR__ . getenv('DB_DATABASE'),
+                'prefix'   => '',
+            ],
+            'oauth' => [
+                'encryption-key' => 'encryptionkeyverysecret',
+                'private-key' => __DIR__ . '/../keys/private.key',
+                'public-key' => __DIR__ . '/../keys/public.key',
+            ]
         ],
     ]);
 };
