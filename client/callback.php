@@ -8,5 +8,7 @@
 </head>
 <body>
     <pre><?php echo $json; ?></pre>
+
+    <a href='/introspect'>Introspect the token</a>
 </body>
 </html>

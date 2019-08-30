@@ -13,6 +13,9 @@ switch ($path) {
     case '/callback':
         callbackAction();
         break;
+    case '/introspect':
+        introspectAction();
+        break;
     default:
         indexAction();
         break;
@@ -40,6 +43,19 @@ function callbackAction()
     $json = json_encode($tokenInfo, JSON_PRETTY_PRINT);
 
     require(__DIR__ . '/callback.php');
+}
+
+function introspectAction()
+{
+    $token = $_SESSION['token'];
+    $response = (new Client)->post('http://localhost:8080/introspect', [
+        'form_params' => [
+            'token' => $token,
+        ],
+    ]);
+
+    $json = json_encode(json_decode($response->getBody()->getContents(), true), JSON_PRETTY_PRINT);
+    echo '<pre>' . $json . '</pre>';
 }
 
 function indexAction()
